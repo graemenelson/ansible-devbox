@@ -1,0 +1,33 @@
+---
+  - name:       add user {{ user }}
+    action:     user name={{ user }} shell=/bin/zsh
+
+  - name:       add .ssh directories for user
+    shell:      mkdir -p /home/{{ user }}/.ssh
+
+  - name:       chown the new .ssh directories for user
+    shell:      chown -R {{ user }}:{{ user }} /home/{{ user }}/.ssh
+
+  - name:       chmod the new .ssh directories for user
+    shell:      chmod 700 /home/{{ user }}/.ssh
+
+  - name:       add public ssh key for user
+    copy:       src=~/.ssh/id_rsa.pub dest=/home/{{ user }}/.ssh/authorized_keys owner={{ user }} group={{ user }} mode=0600
+
+  - name:       add zsh to user
+    git:        repo=https://github.com/robbyrussell/oh-my-zsh.git dest=/home/{{ user }}/.oh-my-zsh
+
+  - name:       add .zshrc file
+    template:   src=zshrc dest=/home/{{ user }}/.zshrc owner={{ user }} group={{ user }}
+
+  - name:       chown the new .oh-my-zsh directories for user
+    shell:      chown -R {{ user }}:{{ user }} /home/{{ user }}/.oh-my-zsh
+
+  - name:       add local global .gitconfig
+    copy:       src=~/.gitconfig dest=/home/{{ user }}/ owner={{ user }} group={{ user }}
+
+  - name:       add better tmux.conf
+    template:   src=tmux.conf dest=/home/{{ user }}/ owner={{ user }} group={{ user }}
+
+  - name:       add sudoers.d file for dev
+    shell:      "echo '{{ user }} ALL=(ALL) NOPASSWD:ALL' >> /etc/sudoers.d/{{ user }}"

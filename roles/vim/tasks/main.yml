@@ -1,0 +1,3 @@
+---
+  - name: add janus vim
+    shell: "sudo -H -u {{ user }} bash -c 'curl -Lo- https://bit.ly/janus-bootstrap | bash'"

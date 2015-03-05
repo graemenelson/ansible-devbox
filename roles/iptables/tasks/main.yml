@@ -1,0 +1,15 @@
+---
+  - name:     upload iptables template
+    template: src=iptables dest=/etc/iptables.rules owner=root group=root mode=0644
+
+  - name:     load iptables
+    shell:    iptables-restore -c < /etc/iptables.rules
+
+  - name:  prevent iptables-persistent install dialog
+    shell: echo {{ item }} | debconf-set-selections
+    with_items:
+    - iptables-persistent iptables-persistent/autosave_v4 boolean true
+    - iptables-persistent iptables-persistent/autosave_v6 boolean true
+
+  - name: install iptables-persistent
+    apt:  name=iptables-persistent

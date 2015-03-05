@@ -1,0 +1,16 @@
+---
+ - hosts: all
+   sudo:  true
+   vars:
+     user: 'dev'
+   roles:
+     - common
+     - iptables
+     - git
+     - nginx
+     - postgres
+     - redis
+     - user
+     - ssh
+     - vim
+     - rvm

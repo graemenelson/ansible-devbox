@@ -1,0 +1,29 @@
+---
+
+  - name: update apt cache
+    apt: update_cache=yes cache_valid_time=3600
+
+  - name: upgrade the distro
+    apt: upgrade=yes
+
+  # - name: release upgrade
+  #   shell: do-release-upgrade
+
+  - name: install packages
+    apt: pkg={{ item }} state=latest
+    with_items:
+      - build-essential
+      - software-properties-common
+      - fail2ban
+      - zsh
+      - tree
+      - vim
+      - tmux
+      - wget
+      - curl
+      - ntp
+      - ruby
+      - python-pycurl
+
+  - name: install rake
+    shell: sudo gem install rake

@@ -1,0 +1,9 @@
+---
+  - name:       postgres server
+    apt:        pkg={{ item }} state=latest
+    with_items:
+      - postgresql
+      - postgresql-client
+      - postgresql-contrib
+      - libpq-dev
+      - python-psycopg2
