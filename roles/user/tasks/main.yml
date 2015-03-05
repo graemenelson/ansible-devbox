@@ -27,7 +27,7 @@
     copy:       src=~/.gitconfig dest=/home/{{ user }}/ owner={{ user }} group={{ user }}
 
   - name:       add better tmux.conf
-    template:   src=tmux.conf dest=/home/{{ user }}/ owner={{ user }} group={{ user }}
+    template:   src=.tmux.conf dest=/home/{{ user }}/ owner={{ user }} group={{ user }}
 
   - name:       add sudoers.d file for dev
     shell:      "echo '{{ user }} ALL=(ALL) NOPASSWD:ALL' >> /etc/sudoers.d/{{ user }}"
