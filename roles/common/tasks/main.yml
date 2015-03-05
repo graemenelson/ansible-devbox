@@ -6,15 +6,11 @@
   - name: upgrade the distro
     apt: upgrade=yes
 
-  # - name: release upgrade
-  #   shell: do-release-upgrade
-
   - name: install packages
     apt: pkg={{ item }} state=latest
     with_items:
       - build-essential
       - software-properties-common
-      - fail2ban
       - zsh
       - tree
       - vim

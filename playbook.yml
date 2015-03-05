@@ -5,6 +5,7 @@
      user: 'dev'
    roles:
      - common
+     - docker
      - iptables
      - git
      - nginx
